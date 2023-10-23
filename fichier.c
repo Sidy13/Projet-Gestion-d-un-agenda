@@ -10,5 +10,6 @@ t_d_cell CreateCell(int val, int level){
     t_d_cell cell;
     cell.value = val;
     int *niveau = (int*)malloc(sizeof(int));
+
     
 }

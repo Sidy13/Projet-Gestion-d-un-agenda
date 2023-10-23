@@ -21,4 +21,6 @@ typedef struct s_d_list
     t_d_cell *head_1;
 } t_d_list;
 
+
+t_d_cell CreateCell();
 #endif //PROJET_GESTION_D_UN_AGENDA_FICHIER_H
