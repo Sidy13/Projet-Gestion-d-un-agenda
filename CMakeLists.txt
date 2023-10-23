@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(Projet_Gestion_d_un_agenda
         main.c
-        README.md)
+        README.md fichier.c)
