@@ -26,3 +26,11 @@ t_d_list emptylist(int max_level){
     }
     return list;
 }
+
+t_d_list addcell_headlist(t_d_cell cell,t_d_list list, int max_level){
+    for(int i = 0; i<max_level; i++){
+        list.head[i] = list.head[i+1];
+    }
+    list.head[0] = &cell;
+    return list;
+}
