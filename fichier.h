@@ -11,16 +11,17 @@
 typedef struct s_d_cell
 {
     int value;
-    struct s_d_cell *next_0;
-    struct s_d_cell *next_1;
+    struct s_d_cell ** next;
+    int level;
 } t_d_cell;
 
 typedef struct s_d_list
 {
-    t_d_cell *head_0;
-    t_d_cell *head_1;
+    t_d_cell **head;
+    int hauteur;
 } t_d_list;
 
 
 t_d_cell CreateCell();
+t_d_list emptylist(int max_level);
 #endif //PROJET_GESTION_D_UN_AGENDA_FICHIER_H

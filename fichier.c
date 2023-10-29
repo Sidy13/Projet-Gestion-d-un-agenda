@@ -7,14 +7,15 @@
 #include "fichier.h"
 
 t_d_cell CreateCell(int val, int level){
-    t_d_cell cell;
-    cell.value = val;
-    if (level == 0){
-    cell.next_0 = NULL;
+    t_d_cell *cell = (t_d_cell*)malloc(sizeof(t_d_cell));
+    cell->value = val;
+    cell->level = level;
+    for (int i = 0; i <level; i++){
+        cell->next[i] = NULL;
     }
-    else {
-        cell.next_0 = NULL;
-        cell.next_1 = NULL;
-    }
-    return cell;
+    return *cell;
+}
+
+t_d_list emptylist(int max_level){
+
 }
