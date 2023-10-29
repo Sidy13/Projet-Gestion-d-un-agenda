@@ -9,7 +9,12 @@
 t_d_cell CreateCell(int val, int level){
     t_d_cell cell;
     cell.value = val;
-    int *niveau = (int*)malloc(sizeof(int));
-
-    
+    if (level == 0){
+    cell.next_0 = NULL;
+    }
+    else {
+        cell.next_0 = NULL;
+        cell.next_1 = NULL;
+    }
+    return cell;
 }
