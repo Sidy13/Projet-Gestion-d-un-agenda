@@ -36,11 +36,28 @@ t_d_list *addcell_headlist(t_d_cell *cell,t_d_list *list, int max_level){
 }
 
 void display_cell_list(t_d_list list, int level) {
-    if (level < list.hauteur) {
-        t_d_cell *current = list.head[level];
-        while (current != NULL) {
-            printf("%d ", current->value);
-            current = current->next[level];
+    if (level < list.hauteur){
+        t_d_cell *newcell = list.head[level];
+        while (newcell != NULL){
+            printf("%d ", newcell->value);
+            newcell = newcell->next[level];
         }
+    }
+}
+
+
+void display_all_level(t_d_list list, int level) {
+    if (level < list.hauteur) {
+        for (int i = 0; i <= level; i++) {
+            t_d_cell *newcell = list.head[i];
+            printf("Niveau %d: ", i);
+            while (newcell != NULL) {
+                printf("%d ", newcell->value);
+                newcell = newcell->next[i];
+            }
+            printf("\n");
+        }
+    } else {
+        printf("Niveau supérieur à la hauteur de la liste.\n");
     }
 }
