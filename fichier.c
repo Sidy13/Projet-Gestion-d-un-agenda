@@ -28,41 +28,52 @@ t_d_list emptylist(int max_level){
 }
 
 t_d_list *addcell_headlist(t_d_cell *cell,t_d_list *list, int max_level){
-    for(int i = 0; i<max_level; i++){
-        cell->next[i] = list->head[i];
+    for (int i = 0; i < max_level; i++) {
+        if (list->head[i] == NULL) {
+            list->head[i] = cell;
+        } else {
+            cell->next[i] = list->head[i];
+            list->head[i] = cell;
+        }
     }
-    list->head[0] = cell;
     return list;
 }
 
 
-void display_cell_list(t_d_list* list, int level)
+
+void display_cell_list (t_d_list list, int level)
 {
-    if (list->head[level] == NULL)
+    if (level > list.hauteur){
+        printf("Niveau supérieur à la hauteur de la liste \n");
+        return;
+    }
+    else if (list.head[level] == NULL)
     {
         printf("[ list  head_%d @-] --> ", level);
-
         printf("NULL ");
     }
     else
     {
         printf("[ list  head_%d @-] --> ", level);
-
-        for (t_d_cell *cell = list->head[level]; cell != NULL; cell = cell->next[level]) {
+        for (t_d_cell *cell = list.head[level]; cell != NULL; cell = cell->next[level]) {
             printf("[ %d | @- ] --> ",cell->value);
         }
-        printf("NULL");
+        printf("NULL ");
     }
 }
 
-void display_all_level(t_d_list *list, int level)
-{
-    for (int i = 0; i < level; i++)
-    {
-        display_cell_list(list, i);
-        printf("\n");
+
+void display_all_level(t_d_list list, int level){
+    if (level > list.hauteur){
+        printf("Niveau trop elevé pour la liste");
     }
-    printf("\n\n");
+    else {
+        for (int i = 0; i < level; i++) {
+            display_cell_list(list, i);
+            printf("\n");
+        }
+        printf("\n\n");
+    }
 }
 
 
@@ -92,11 +103,11 @@ t_d_list *addcell_list(t_d_cell *cell, t_d_list *list, int level){
 
 }*/
 
-t_d_list *addcell_anywhere_inlist(t_d_cell *cell, t_d_list *list, int level) {
-    if (level< list->hauteur) {
-        for (int i = 0; i < level; i++) {
-            if (list->head[i] != NULL) {
-                list->head[i] = list->head[i + 1];
+t_d_list *addcell_anywhere_inlist(t_d_cell *cell, t_d_list *list, int max_level) {
+    if (max_level< list->hauteur) {
+        for (int i = 0; i < max_level; i++) {
+            if (list->head[i] == NULL) {
+                addcell_headlist(cell, list, max_level);
             }
             else {
                 list->head[i] = *cell->next;
@@ -106,3 +117,25 @@ t_d_list *addcell_anywhere_inlist(t_d_cell *cell, t_d_list *list, int level) {
     }
     return list;
 }
+
+/*t_d_list *addcell_level(t_d_cell *cell, t_d_list *list, int level){
+    if(list->head[level] == NULL)
+    {
+        list->head[level] = cell;
+    }
+    t_d_cell *tmp, *ptmp;
+    tmp = list->head[level];
+    ptmp = tmp;
+
+    while(tmp != NULL && cell->value > tmp->value)
+    {
+        ptmp = tmp;
+        tmp = *tmp->next;
+    }
+    ptmp->next = &cell;
+    cell->next = &tmp;
+}
+
+t_d_list *addcell_list(t_d_cell *cell, t_d_list *list, int level){
+
+}*/
