@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include "timer.h"
 
-
 typedef struct s_d_cell
 {
     int value;
