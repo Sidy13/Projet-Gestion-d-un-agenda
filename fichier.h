@@ -6,6 +6,7 @@
 #define PROJET_GESTION_D_UN_AGENDA_FICHIER_H
 #include <stdio.h>
 #include <stdlib.h>
+#include "timer.h"
 
 
 typedef struct s_d_cell
