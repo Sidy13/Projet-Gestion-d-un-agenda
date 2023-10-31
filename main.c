@@ -12,6 +12,8 @@ int main()
     addcell_headlist(&cell2, &list, 2);
     addcell_headlist(&cell3, &list, 5);
     display_all_level(list, 4);
+    addcell_anywhere_inlist(&list, &cell, 10);
+    display_all_level(list, 3);
 
 
     return 0;

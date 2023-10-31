@@ -29,7 +29,9 @@ void display_cell_list(t_d_list list, int level);
 void display_all_level(t_d_list list, int level);
 void display_aligned_cell(t_d_cell cell, t_d_list list, int level);
 t_d_list *addcell_level(t_d_cell *cell,t_d_list *list, int max_level);
-void addcell_anywhere_inlist(t_d_cell *cell, t_d_list *list, int val, int max_level);
+void addcell_anywhere_inlist(t_d_list* list, t_d_cell *cell, int level);
+int create_tab(int power);
+
 
 
 #endif //PROJET_GESTION_D_UN_AGENDA_FICHIER_H

@@ -77,44 +77,45 @@ void display_all_level(t_d_list list, int level){
 }
 
 
-void display_aligned_cell(t_d_cell cell, t_d_list list, int level){
 
-}
 
-/*t_d_list *addcell_level(t_d_cell *cell, t_d_list *list, int level){
-    if(list->head[level] == NULL)
+
+
+void addcell_anywhere_inlist(t_d_list* list, t_d_cell *cell, int level)
     {
-        list->head[level] = cell;
-    }
-    t_d_cell *tmp, *ptmp;
-    tmp = list->head[level];
-    ptmp = tmp;
 
-    while(tmp != NULL && cell->value > tmp->value)
-    {
-        ptmp = tmp;
-        tmp = *tmp->next;
-    }
-    ptmp->next = &cell;
-    cell->next = &tmp;
-}
+        if(level > list->hauteur)
+        {
+            printf("Niveau trop élevé pour la liste");
+            return;
+        }
 
-t_d_list *addcell_list(t_d_cell *cell, t_d_list *list, int level){
+        else {
 
-}*/
+            for (int i = 0; i < level; i++) {
+                if (list->head[i] == NULL  || cell->value <= list->head[i]->value)
+                {
+                    cell->next[i] = list->head[i];
+                    list->head[i] = cell;
 
-void addcell_anywhere_inlist(t_d_cell cell, t_d_list *list, int val, int max_level) {
-    if (max_level< list->hauteur) {
-        for (int i = 0; i < max_level; i++) {
-            if (list->head[i] == NULL) {
-                addcell_headlist(&cell, list, max_level);
-            }
-            else {
-                list->head[i] = *cell.next;
+                }
+                else{
+
+                    t_d_cell *tmp;
+                    t_d_cell *ptmp;
+                    tmp = list->head[i];
+
+                    while (tmp != NULL && cell->value > tmp->value) {
+                        ptmp = tmp;
+                        tmp = tmp->next[i];
+
+                    }
+                    ptmp->next[i] = cell;
+                    cell->next[i] = tmp;
+                }
             }
         }
     }
-}
 
 /*t_d_list *addcell_level(t_d_cell *cell, t_d_list *list, int level){
     if(list->head[level] == NULL)
@@ -137,3 +138,13 @@ void addcell_anywhere_inlist(t_d_cell cell, t_d_list *list, int val, int max_lev
 t_d_list *addcell_list(t_d_cell *cell, t_d_list *list, int level){
 
 }*/
+
+//Partie 2
+
+int create_tab(int power){
+    int puissance = 2;
+    for (int i = 0; i < power; i++){
+        puissance *= 2;
+    }
+    int *tab[puissance];
+}
