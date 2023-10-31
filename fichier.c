@@ -103,19 +103,17 @@ t_d_list *addcell_list(t_d_cell *cell, t_d_list *list, int level){
 
 }*/
 
-t_d_list *addcell_anywhere_inlist(t_d_cell *cell, t_d_list *list, int max_level) {
+void addcell_anywhere_inlist(t_d_cell cell, t_d_list *list, int val, int max_level) {
     if (max_level< list->hauteur) {
         for (int i = 0; i < max_level; i++) {
             if (list->head[i] == NULL) {
-                addcell_headlist(cell, list, max_level);
+                addcell_headlist(&cell, list, max_level);
             }
             else {
-                list->head[i] = *cell->next;
-                return list;
+                list->head[i] = *cell.next;
             }
         }
     }
-    return list;
 }
 
 /*t_d_list *addcell_level(t_d_cell *cell, t_d_list *list, int level){
