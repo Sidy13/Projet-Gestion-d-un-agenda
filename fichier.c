@@ -39,10 +39,11 @@ void display_cell_list(t_d_list list, int level) {
     if (level < list.hauteur){
         t_d_cell *newcell = list.head[level];
         while (newcell != NULL){
-            printf("%d ", newcell->value);
+            printf("[ list  head_%d @-] -->  %d ",level, newcell->value);
             newcell = newcell->next[level];
         }
     }
+    printf("\n");
 }
 
 
@@ -50,7 +51,7 @@ void display_all_level(t_d_list list, int level) {
     if (level < list.hauteur) {
         for (int i = 0; i < level; i++) {
             t_d_cell *newcell = list.head[i];
-            printf("Niveau %d: ", i);
+            printf("[ list  head_%d @-] --> ", i);
             while (newcell != NULL) {
                 printf("%d ", newcell->value);
                 newcell = newcell->next[i];
@@ -60,6 +61,7 @@ void display_all_level(t_d_list list, int level) {
     } else {
         printf("Niveau supérieur à la hauteur de la liste.\n");
     }
+    printf("\n");
 }
 
 void display_aligned_cell(t_d_cell cell, t_d_list list, int level){
