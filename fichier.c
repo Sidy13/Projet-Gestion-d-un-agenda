@@ -29,7 +29,7 @@ t_d_list emptylist(int max_level){
 
 t_d_list *addcell_headlist(t_d_cell *cell,t_d_list *list, int max_level){
     for(int i = 0; i<max_level; i++){
-        list->head[i] = *cell->next;
+        cell->next[i] = list->head[i];
     }
     list->head[0] = cell;
     return list;
@@ -97,7 +97,8 @@ t_d_list *addcell_anywhere_inlist(t_d_cell *cell, t_d_list *list, int level) {
         for (int i = 0; i < level; i++) {
             if (list->head[i] != NULL) {
                 list->head[i] = list->head[i + 1];
-            } else {
+            }
+            else {
                 list->head[i] = *cell->next;
                 return list;
             }
