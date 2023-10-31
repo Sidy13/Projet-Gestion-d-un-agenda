@@ -31,4 +31,5 @@ void display_aligned_cell(t_d_cell cell, t_d_list list, int level);
 t_d_list *addcell_level(t_d_cell *cell,t_d_list *list, int max_level);
 t_d_list *addcell_anywhere_inlist(t_d_cell *cell, t_d_list *list, int max_level);
 
+
 #endif //PROJET_GESTION_D_UN_AGENDA_FICHIER_H

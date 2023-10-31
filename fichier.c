@@ -65,7 +65,7 @@ void display_cell_list (t_d_list list, int level)
 
 void display_all_level(t_d_list list, int level){
     if (level > list.hauteur){
-        printf("Niveau trop elevé pour la liste");
+        printf("Niveau trop élevé pour la liste");
     }
     else {
         for (int i = 0; i < level; i++) {
