@@ -35,34 +35,36 @@ t_d_list *addcell_headlist(t_d_cell *cell,t_d_list *list, int max_level){
     return list;
 }
 
-void display_cell_list(t_d_list list, int level) {
-    if (level < list.hauteur){
-        t_d_cell *newcell = list.head[level];
-        while (newcell != NULL){
-            printf("[ list  head_%d @-] -->  %d ",level, newcell->value);
-            newcell = newcell->next[level];
-        }
+
+void display_cell_list(t_d_list* list, int level)
+{
+    if (list->head[level] == NULL)
+    {
+        printf("[ list  head_%d @-] --> ", level);
+
+        printf("NULL ");
     }
-    printf("\n");
+    else
+    {
+        printf("[ list  head_%d @-] --> ", level);
+
+        for (t_d_cell *cell = list->head[level]; cell != NULL; cell = cell->next[level]) {
+            printf("[ %d | @- ] --> ",cell->value);
+        }
+        printf("NULL");
+    }
 }
 
-
-void display_all_level(t_d_list list, int level) {
-    if (level < list.hauteur) {
-        for (int i = 0; i < level; i++) {
-            t_d_cell *newcell = list.head[i];
-            printf("[ list  head_%d @-] --> ", i);
-            while (newcell != NULL) {
-                printf("%d ", newcell->value);
-                newcell = newcell->next[i];
-            }
-            printf("\n");
-        }
-    } else {
-        printf("Niveau supérieur à la hauteur de la liste.\n");
+void display_all_level(t_d_list *list, int level)
+{
+    for (int i = 0; i < level; i++)
+    {
+        display_cell_list(list, i);
+        printf("\n");
     }
-    printf("\n");
+    printf("\n\n");
 }
+
 
 void display_aligned_cell(t_d_cell cell, t_d_list list, int level){
 
@@ -89,3 +91,17 @@ void display_aligned_cell(t_d_cell cell, t_d_list list, int level){
 t_d_list *addcell_list(t_d_cell *cell, t_d_list *list, int level){
 
 }*/
+
+t_d_list *addcell_anywhere_inlist(t_d_cell *cell, t_d_list *list, int level) {
+    if (level< list->hauteur) {
+        for (int i = 0; i < level; i++) {
+            if (list->head[i] != NULL) {
+                list->head[i] = list->head[i + 1];
+            } else {
+                list->head[i] = *cell->next;
+                return list;
+            }
+        }
+    }
+    return list;
+}
