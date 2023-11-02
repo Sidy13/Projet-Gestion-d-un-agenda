@@ -30,6 +30,7 @@ void display_all_level(t_d_list list, int level);
 void display_aligned_cell(t_d_cell cell, t_d_list list, int level);
 void addcell_anywhere_inlist(t_d_list* list, t_d_cell *cell);
 int search_at_zero(t_d_list list, int val);
+int search_from_top(t_d_list list, int val);
 
 //Partie 2
 

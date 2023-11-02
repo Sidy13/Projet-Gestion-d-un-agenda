@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fichier.h"
-#include <math.h>
 
 t_d_cell CreateCell(int val, int level){
     t_d_cell cell;
@@ -116,8 +115,8 @@ void addcell_anywhere_inlist(t_d_list* list, t_d_cell *cell)
         }
     }
 
-//Partie 2
 
+//Partie 2
 
 int puissance_deux (int power){
     int puissance = 2;
@@ -177,17 +176,30 @@ t_d_list create_tab(int power){
 
 int search_at_zero(t_d_list list, int val){
     int compteur = 0;
-    t_d_cell newcell = CreateCell(val, list.hauteur);
-    t_d_cell *tmp = &newcell;
+    t_d_cell *tmp = list.head[0];
     while (tmp != NULL) {
-        if (list.head[0]->value == val) {
+        if (tmp->value == val) {
             compteur++;
         }
-        tmp = *tmp->next;
+        tmp = tmp->next;
     }
     return compteur;
 }
 
-int search_in_top()
+int search_from_top(t_d_list list, int val){
+    int compteur = 0;
+    int hauteur = list.hauteur;
+    t_d_cell *max;
+    for (int i = hauteur-1; i >=0; i--){
+        max = list.head[i];
+        while (max != NULL) {
+            if (max->value == val) {
+                compteur++;
+            }
+            max = max->next;
+        }
+    }
+    return compteur;
+}
 
 
