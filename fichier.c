@@ -170,10 +170,24 @@ t_d_list create_tab(int power){
     for (int k = 0; k < 1; k++){
         newcell = CreateCell(k+1, niveau[k]);
         addcell_headlist(&newcell, &list, power);
-        display_all_level(list, power);
     }
 
     return list;
 }
+
+int search_at_zero(t_d_list list, int val){
+    int compteur = 0;
+    t_d_cell newcell = CreateCell(val, list.hauteur);
+    t_d_cell *tmp = &newcell;
+    while (tmp != NULL) {
+        if (list.head[0]->value == val) {
+            compteur++;
+        }
+        tmp = *tmp->next;
+    }
+    return compteur;
+}
+
+int search_in_top()
 
 
