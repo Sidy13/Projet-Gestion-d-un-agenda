@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fichier.h"
+#include <math.h>
 
 t_d_cell CreateCell(int val, int level){
     t_d_cell cell;
@@ -80,19 +81,17 @@ void display_all_level(t_d_list list, int level){
 
 
 
-
-void addcell_anywhere_inlist(t_d_list* list, t_d_cell *cell, int level)
+void addcell_anywhere_inlist(t_d_list* list, t_d_cell *cell)
     {
 
-        if(level > list->hauteur)
+        if(cell->level > list->hauteur)
         {
-            printf("Niveau trop élevé pour la liste");
+            printf("Niveau trop élevé pour la liste \n");
             return;
         }
 
         else {
-
-            for (int i = 0; i < level; i++) {
+            for (int i = 0; i < cell->level; i++) {
                 if (list->head[i] == NULL  || cell->value <= list->head[i]->value)
                 {
                     cell->next[i] = list->head[i];
@@ -117,34 +116,64 @@ void addcell_anywhere_inlist(t_d_list* list, t_d_cell *cell, int level)
         }
     }
 
-/*t_d_list *addcell_level(t_d_cell *cell, t_d_list *list, int level){
-    if(list->head[level] == NULL)
-    {
-        list->head[level] = cell;
-    }
-    t_d_cell *tmp, *ptmp;
-    tmp = list->head[level];
-    ptmp = tmp;
-
-    while(tmp != NULL && cell->value > tmp->value)
-    {
-        ptmp = tmp;
-        tmp = *tmp->next;
-    }
-    ptmp->next = &cell;
-    cell->next = &tmp;
-}
-
-t_d_list *addcell_list(t_d_cell *cell, t_d_list *list, int level){
-
-}*/
-
 //Partie 2
 
-int create_tab(int power){
+
+int puissance_deux (int power){
     int puissance = 2;
-    for (int i = 0; i < power; i++){
+    if (power == 0){
+        puissance = 1;
+        return puissance;
+    }
+    for (int i = 1; i < power; i++){
         puissance *= 2;
     }
-    int *tab[puissance];
+    return puissance;
 }
+/*t_d_list create_tab(int value) {
+
+    int val_max = puissance_deux(value) ;
+
+    t_d_list list = emptylist(value);
+
+    for (int i = 1; i < val_max; i++) {
+        int level = 1;
+        while (i % (1 << level) == 0) {
+            level++;
+        }
+        t_d_cell tmp = (CreateCell(i, level));
+        addcell_anywhere_inlist(&list, &tmp);
+    }
+
+    // Retourner la liste
+    return list;
+}*/
+
+
+t_d_list create_tab(int power){
+
+    t_d_cell newcell;
+    t_d_cell *tmp = (t_d_cell*) malloc(sizeof(t_d_cell));
+    t_d_list list = emptylist(power);
+    int nbcell = puissance_deux(power) - 1;
+    int niveau[nbcell];
+    for (int i = 0; i< nbcell; i++){
+        niveau[i] = -1;
+    }
+    for(int i = 0; i < nbcell; i++) {
+        for (int j = 0; j < power; j++) {
+            if ((i+1) % puissance_deux(j) == 0){
+                niveau[i]++;
+            }
+        }
+    }
+    for (int k = 0; k < 1; k++){
+        newcell = CreateCell(k+1, niveau[k]);
+        addcell_headlist(&newcell, &list, power);
+        display_all_level(list, power);
+    }
+
+    return list;
+}
+
+
