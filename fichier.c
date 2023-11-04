@@ -177,29 +177,63 @@ t_d_list create_tab(int power){
 int search_at_zero(t_d_list list, int val){
     int compteur = 0;
     t_d_cell *tmp = list.head[0];
+    if (tmp == NULL){
+        return 0;
+    }
     while (tmp != NULL) {
         if (tmp->value == val) {
-            compteur++;
+            printf("Valeur %d trouvée au niveau 0", val);
+            return 1;
         }
         tmp = tmp->next;
     }
-    return compteur;
+    return 0;
 }
 
-int search_from_top(t_d_list list, int val){
+/*int search_from_top(t_d_list list, int val){
     int compteur = 0;
     int hauteur = list.hauteur;
-    t_d_cell *max;
+    t_d_cell *tmp;
     for (int i = hauteur-1; i >=0; i--){
-        max = list.head[i];
-        while (max != NULL) {
-            if (max->value == val) {
-                compteur++;
+        tmp = list.head[i];
+        while (tmp != NULL) {
+            if (tmp->value == val) {
+                printf("%d trouvé au niveau %d", val, i);
+                return 1;
             }
-            max = max->next;
+            tmp = tmp->next;
         }
     }
-    return compteur;
-}
+    return 0;
+}*/
 
+int search_from_top(t_d_list list, int val){ // Recherche dichotomique
+    printf("d");
+    int hauteur = list.hauteur;
+    t_d_cell *tmp;
+    printf("d");
+    for (int i = hauteur-1; i >=0; i--) {
+        tmp = list.head[i];
+        int gauche = 0;
+        int droite = 0;
+        while(tmp != NULL){
+            droite++;
+            tmp = tmp->next;
+        }
+        tmp = list.head[i];
+        while (gauche <= droite){
+            int milieu = (gauche + droite) / 2;
+            if (tmp->next[milieu]->value == val) {
+                printf("%d trouvée au niveau %d", val, i);
+                return 1;
+            } else if (tmp->next[milieu]->value < val) {
+                gauche = milieu + 1;
+            } else {
+                droite = milieu - 1;
+            }
+        }
+    }
+    printf("%d absent de la liste", val);
+    return 0;
+}
 
