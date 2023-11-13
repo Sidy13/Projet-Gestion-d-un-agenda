@@ -207,33 +207,84 @@ int search_at_zero(t_d_list list, int val){
     return 0;
 }*/
 
-int search_from_top(t_d_list list, int val){ // Recherche dichotomique
-    printf("d");
+/*int search_from_top(t_d_list list, int val) { // Recherche dichotomique
+    printf("test");
     int hauteur = list.hauteur;
     t_d_cell *tmp;
-    printf("d");
-    for (int i = hauteur-1; i >=0; i--) {
+    printf("test");
+    int gauche = 0;
+    int droite = 0;
+
+    for (int i = hauteur - 1; i >= 0; i--) {
         tmp = list.head[i];
-        int gauche = 0;
-        int droite = 0;
-        while(tmp != NULL){
+        droite = 0;
+        gauche = 0;
+        while (tmp != NULL) {
             droite++;
             tmp = tmp->next;
         }
         tmp = list.head[i];
-        while (gauche <= droite){
-            int milieu = (gauche + droite) / 2;
-            if (tmp->next[milieu]->value == val) {
-                printf("%d trouvée au niveau %d", val, i);
-                return 1;
-            } else if (tmp->next[milieu]->value < val) {
-                gauche = milieu + 1;
-            } else {
-                droite = milieu - 1;
+            while (gauche <= droite) {
+                int milieu = (gauche + droite) / 2;
+                if ((tmp != NULL) && (tmp->next[milieu] != NULL)){
+                    if (tmp->next[milieu]->value == val) {
+                        printf("%d trouvée au niveau %d\n", val, i);
+                        return 1;
+                    } else if (tmp->next[milieu]->value < val) {
+                        gauche = milieu + 1;
+                    } else {
+                        droite = milieu - 1;
+                    }
             }
         }
     }
-    printf("%d absent de la liste", val);
+    printf("%d absent de la liste\n", val);
+    return 0;
+}*/
+
+int search_from_top(t_d_list list, int val) {
+    int hauteur = list.hauteur;
+    t_d_cell *tmp;
+    int gauche, droite, milieu;
+
+    for (int i = hauteur - 1; i >= 0; i--) {
+        tmp = list.head[i];
+
+        // Initialisation de gauche et droite en fonction de la taille de la liste
+        gauche = 0;
+        droite = 0;
+        while (tmp != NULL) {
+            droite++;
+            tmp = tmp->next;
+        }
+
+        tmp = list.head[i];
+
+        while (gauche <= droite) {
+            milieu = (gauche + droite) / 2;
+
+            if ((tmp != NULL) && (tmp->next != NULL)) {
+                // Accéder à l'élément à la position milieu dans la liste du niveau i
+                t_d_cell *current = tmp->next[milieu];
+
+                if (current != NULL) {
+                    if (current->value == val) {
+                        printf("%d trouvée au niveau %d\n", val, i);
+                        return 1;
+                    } else if (current->value < val) {
+                        gauche = milieu + 1;
+                    } else {
+                        droite = milieu - 1;
+                    }
+                } else {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    printf("%d est absent de la liste\n", val);
     return 0;
 }
-
