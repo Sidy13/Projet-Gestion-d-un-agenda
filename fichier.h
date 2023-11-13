@@ -21,7 +21,36 @@ typedef struct s_d_list
     int hauteur;
 } t_d_list;
 
+typedef struct{
+    char* nom;
+     char *prenom[50];
+} contact;
 
+typedef struct{
+    int jour;
+    int mois;
+    int annee;
+}date;
+
+typedef struct {
+    int heure;
+    int minute;
+} heure;
+
+typedef struct{
+    int heure;
+    int minute;
+} duree;
+
+
+typedef struct{
+    date Date;
+    heure Heure;
+    duree Duree;
+    char* objet;
+} rdv;
+
+typedef struct
 t_d_cell CreateCell(int val, int level);
 t_d_list emptylist(int max_level);
 t_d_list *addcell_headlist(t_d_cell *cell,t_d_list *list, int max_level);
